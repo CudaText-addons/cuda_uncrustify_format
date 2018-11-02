@@ -7,10 +7,37 @@ format_proc.INI = 'cuda_uncrustify_format.ini'
 format_proc.MSG = '[Uncrustify] '
 PROGRAM = 'uncrustify.exe' if os.name=='nt' else 'uncrustify' 
 
+LANGS = {
+    'C': 'C',
+    'C++': 'CPP',
+    'C#': 'CS',
+    'D': 'D',
+    'Java': 'JAVA',
+    'Pawn': 'PAWN',
+    'Objective-C': 'OC',
+    'Objective-C++': 'OC+',
+    'Vala': 'VALA',
+    }
 
-def run_app(text, filename, config):
+def run_app(text, config):
 
-    command = [PROGRAM, "--assume", os.path.basename(filename), "-c", config]
+    tab_spaces = app.ed.get_prop(app.PROP_TAB_SPACES)
+    tab_size = app.ed.get_prop(app.PROP_TAB_SIZE)
+    lexer = app.ed.get_prop(app.PROP_LEXER_FILE)
+    syntax = LANGS.get(lexer)
+    if not syntax: return
+
+    command = [
+        PROGRAM, 
+        '-l', syntax,
+        '-c', config,
+        '--set', 'newlines=LF',
+        '--set', 'indent_with_tabs='+str(0 if tab_spaces else 1),
+        '--set', 'indent_columns='+str(tab_size),
+        '--set', 'input_tab_size='+str(tab_size),
+        '--set', 'output_tab_size='+str(tab_size),
+        ]
+
     print('Running:', ' '.join(command))
     content = text.encode("utf-8")
     
@@ -63,7 +90,7 @@ def do_format(text):
     else:
         config = config_os
     
-    return run_app(text, filename, config)
+    return run_app(text, config)
 
 
 class Command:
