@@ -8,6 +8,6 @@ $lex=C,C++,C#,Objective-C,D,Java,Pawn,Vala
 
 [item1]
 section=commands
-caption=Uncrustify Format\Format
+caption=Uncrustify Format
 method=run
 lexers=$lex
