@@ -8,9 +8,10 @@ program is not included:
   Copy exe-file to some folder in PATH, or to the folder "tools" under CudaText folder.
 - Linux/macOS: install using OS package manager, e.g. package "uncrustify" on Ubuntu.
 
-program settings:
-- tried file uncrustify.cfg from the folder of current editor file
-- if not found, tried file uncrustify.cfg from OS home folder.
+config file uncrustify.cfg is searched in folders:
+- folder of current editor file
+- CudaText/settings folder
+- OS home folder
 
 author: Alexey (CudaText)
 license: MIT

@@ -1,3 +1,6 @@
 
+2018.11.02.2
++ added using of config file from CudaText/settings
+
 2018.11.02
 initial

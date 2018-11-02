@@ -5,7 +5,9 @@ from . import format_proc
 
 format_proc.INI = 'cuda_uncrustify_format.ini'
 format_proc.MSG = '[Uncrustify] '
+
 PROGRAM = 'uncrustify.exe' if os.name=='nt' else 'uncrustify' 
+CONFIG = 'uncrustify.cfg'
 
 LANGS = {
     'C': 'C',
@@ -86,12 +88,15 @@ def run_app(text, config):
 
 def do_format(text):
 
-    filename = app.ed.get_filename()
-    config_file = os.path.join(os.path.dirname(filename), 'uncrustify.cfg')
-    config_os = os.path.expanduser('~'+os.sep+'uncrustify.cfg')
+    fn = app.ed.get_filename()
+    config_file = os.path.join(os.path.dirname(fn), CONFIG)
+    config_cuda = os.path.join(app.app_path(app.APP_DIR_SETTINGS), CONFIG)
+    config_os = os.path.expanduser('~'+os.sep+CONFIG)
 
     if os.path.exists(config_file):
         config = config_file
+    elif os.path.exists(config_cuda):
+        config = config_cuda
     else:
         config = config_os
     
