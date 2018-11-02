@@ -24,8 +24,7 @@ def run_app(text, config):
     tab_spaces = app.ed.get_prop(app.PROP_TAB_SPACES)
     tab_size = app.ed.get_prop(app.PROP_TAB_SIZE)
     lexer = app.ed.get_prop(app.PROP_LEXER_FILE)
-    syntax = LANGS.get(lexer)
-    if not syntax: return
+    syntax = LANGS.get(lexer, 'C')
 
     command = [
         PROGRAM, 
