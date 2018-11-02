@@ -26,8 +26,14 @@ def run_app(text, config):
     lexer = app.ed.get_prop(app.PROP_LEXER_FILE)
     syntax = LANGS.get(lexer, 'C')
 
+    program = PROGRAM
+    if os.name=='nt':
+        fn = os.path.join(app.app_path(app.APP_DIR_EXE), 'tools', 'uncrustify.exe')
+        if os.path.exists(fn):
+            program = fn
+
     command = [
-        PROGRAM, 
+        program, 
         '-l', syntax,
         '-c', config,
         '--set', 'newlines=LF',
@@ -82,7 +88,7 @@ def do_format(text):
 
     filename = app.ed.get_filename()
     config_file = os.path.join(os.path.dirname(filename), 'uncrustify.cfg')
-    config_os = os.path.expanduser('~/uncrustify.cfg')
+    config_os = os.path.expanduser('~'+os.sep+'uncrustify.cfg')
 
     if os.path.exists(config_file):
         config = config_file

@@ -5,7 +5,7 @@ gives command in the Plugins menu: Uncrustify Format.
 
 program is not included:
 - Windows: download binary from https://sourceforge.net/projects/uncrustify/ 
-  and copy exe-file to some folder in PATH.
+  Copy exe-file to some folder in PATH, or to the folder "tools" under CudaText folder.
 - Linux/macOS: install using OS package manager, e.g. package "uncrustify" on Ubuntu.
 
 program settings:
